@@ -1,7 +1,11 @@
 import chromadb
+import os
+import tempfile
 
 # Persistent client — saves to disk so embeddings survive between runs
-client = chromadb.PersistentClient(path="./chroma_db")
+client = chromadb.PersistentClient(
+    path=os.getenv("CHROMA_DB_PATH", os.path.join(tempfile.gettempdir(), "chroma_db"))
+)
 
 collection = client.get_or_create_collection(name="code_functions")
 

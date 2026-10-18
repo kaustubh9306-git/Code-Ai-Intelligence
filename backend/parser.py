@@ -1,10 +1,12 @@
-from tree_sitter_language_pack import get_parser
+from tree_sitter_language_pack import PackConfig, get_parser, init
 import os
 import re
-from tree_sitter_language_pack import get_parser
 import os
 import re
 import hashlib
+import tempfile
+
+init(PackConfig(cache_dir=os.path.join(tempfile.gettempdir(), "tree-sitter-cache")))
 
 def parse_python_file(file_path):
     with open(file_path, "rb") as f:
